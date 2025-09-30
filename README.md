@@ -1,0 +1,1 @@
+This is a simple app for displaying prompts when clicking a button or shaking your phone.
