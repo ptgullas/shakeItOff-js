@@ -1,6 +1,6 @@
 /* Import a retro-style font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 :root {
     --background: #1a1a2e;
     --teal: #00f5d4;
@@ -27,7 +27,8 @@ body {
 
 h1 {
     color: var(--magenta);
-    font-size: 4rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
     letter-spacing: 4px;
     text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
 }
