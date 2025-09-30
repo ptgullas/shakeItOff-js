@@ -15,7 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Check if data and properties exist
             if (data && data.title && data.prompts) {
                 pageTitleElement.textContent = data.title; // NEW: Set the page title
-                prompts = data.prompts; // UPDATED: Get prompts from the object
+                masterPrompts = data.prompts; // UPDATED: Get prompts from the object
+                // Create a copy for the available pool to start with
+                availablePrompts = [...masterPrompts];
             } else {
                 promptTextElement.textContent = 'Could not load prompts. Invalid file format.';
             }
