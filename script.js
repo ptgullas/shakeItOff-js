@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const promptTextElement = document.getElementById('prompt-text');
     const newPromptBtn = document.getElementById('new-prompt-btn');
 
-    let prompts = [];
-    let currentPrompt = '';
+// NEW: Use two arrays to manage the prompts
+    let masterPrompts = [];     // The original, complete list of prompts
+    let availablePrompts = [];  // The current pool of prompts to choose from
 
     // Fetch the prompts from the JSON file
     fetch('prompts-lazarus.json')
@@ -24,19 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
             promptTextElement.textContent = 'Could not load prompts.';
         });
 
-    // Function to get and display a new prompt
+// UPDATED: This function now pulls from the available pool without replacement
     function getNewPrompt() {
-        if (prompts.length === 0) return;
+        // Step 1: Check if the pool of available prompts is empty.
+        if (availablePrompts.length === 0) {
+            console.log("All prompts shown. Resetting the list!");
+            // Step 2: If it is, refill it from the master list.
+            availablePrompts = [...masterPrompts];
+        }
 
-        let newPrompt = '';
-        // Make sure we don't show the same prompt twice in a row
-        do {
-            const randomIndex = Math.floor(Math.random() * prompts.length);
-            newPrompt = prompts[randomIndex];
-        } while (newPrompt === currentPrompt);
+        // Step 3: Pick a random index from the *current* pool.
+        const randomIndex = Math.floor(Math.random() * availablePrompts.length);
 
-        currentPrompt = newPrompt;
-        promptTextElement.textContent = currentPrompt;
+        // Step 4: Use splice() to remove the prompt from the pool and get its value.
+        const chosenPrompt = availablePrompts.splice(randomIndex, 1)[0];
+
+        // Step 5: Display the chosen prompt.
+        promptTextElement.textContent = chosenPrompt;
     }
 
     // Event listener for the button
