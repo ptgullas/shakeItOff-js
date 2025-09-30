@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     newPromptBtn.addEventListener('click', getNewPrompt);
 
 // --- Shake Detection and Haptic Feedback ---
-
+/*
     // Check if the Device Motion API is available
     if (window.DeviceMotionEvent) {
         // iOS requires user permission to access device motion
@@ -103,4 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.log("DeviceMotionEvent is not supported by your browser.");
     }
+        
+    
+*/
 });
