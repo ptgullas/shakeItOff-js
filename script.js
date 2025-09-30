@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.addEventListener('devicemotion', handleShake);
         }
 
-        const shakeThreshold = 30; // UPDATED: Increased from 15 to make it less sensitive
+        const shakeThreshold = 256; // UPDATED: Increased from 15 to make it less sensitive
         let lastX, lastY, lastZ;
         let lastUpdate = 0;
         let isShaking = false; // NEW: Cooldown flag to prevent multiple triggers
