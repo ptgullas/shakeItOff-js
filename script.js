@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Get references to the HTML elements
+    const pageTitleElement = document.getElementById('page-title'); // NEW
     const promptTextElement = document.getElementById('prompt-text');
     const newPromptBtn = document.getElementById('new-prompt-btn');
 
@@ -7,10 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPrompt = '';
 
     // Fetch the prompts from the JSON file
-    fetch('prompts-demo.json')
+    fetch('prompts-lazarus.json')
         .then(response => response.json())
         .then(data => {
-            prompts = data;
+            // Check if data and properties exist
+            if (data && data.title && data.prompts) {
+                pageTitleElement.textContent = data.title; // NEW: Set the page title
+                prompts = data.prompts; // UPDATED: Get prompts from the object
+            } else {
+                promptTextElement.textContent = 'Could not load prompts. Invalid file format.';
+            }
         })
         .catch(error => {
             console.error('Error fetching prompts:', error);

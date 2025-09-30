@@ -1,7 +1,10 @@
-[
-  "What is one small thing you are grateful for today?",
-  "If you could have any superpower, what would it be and why?",
-  "What's a skill you'd like to learn?",
-  "Share a favorite memory from your childhood.",
-  "What's the best piece of advice you've ever received?"
-]
+{
+  "title": "Synthwave Starters",
+  "prompts": [
+    "What is one small thing you are grateful for today?",
+    "If you could have any superpower, what would it be and why?",
+    "What's a skill you'd like to learn?",
+    "Share a favorite memory from your childhood.",
+    "What's the best piece of advice you've ever received?"
+  ]
+}
