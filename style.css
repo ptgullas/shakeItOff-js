@@ -1,0 +1,68 @@
+/* Import a retro-style font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --background: #1a1a2e;
+    --teal: #00f5d4;
+    --magenta: #f72585;
+    --yellow: #fee440;
+    --glow-color: rgba(247, 37, 133, 0.7); /* Magenta glow */
+}
+
+body {
+    background-color: var(--background);
+    color: var(--teal);
+    font-family: 'Montserrat', monospace;
+    font-size: 1.5rem; /* Base font size */
+    
+    /* Center content */
+    display: grid;
+    place-content: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+h1 {
+    color: var(--magenta);
+    font-size: 4rem;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+}
+
+#prompt-container {
+    min-height: 150px;
+    padding: 2rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--teal);
+    box-shadow: 0 0 15px rgba(0, 245, 212, 0.5); /* Teal glow */
+}
+
+#prompt-text {
+    color: var(--yellow);
+    font-size: 2rem;
+    line-height: 1.4;
+}
+
+button {
+    background-color: transparent;
+    border: 2px solid var(--magenta);
+    color: var(--magenta);
+    padding: 15px 30px;
+    font-family: 'Montserrat', monospace;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--glow-color);
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: var(--magenta);
+    color: var(--background);
+    box-shadow: 0 0 20px var(--glow-color), 0 0 30px var(--glow-color);
+}
