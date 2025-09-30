@@ -35,12 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener for the button
     newPromptBtn.addEventListener('click', getNewPrompt);
 
-    // --- Shake Detection and Haptic Feedback ---
+// --- Shake Detection and Haptic Feedback ---
 
     // Check if the Device Motion API is available
     if (window.DeviceMotionEvent) {
         // iOS requires user permission to access device motion
-        // We can ask for permission when the user clicks the button the first time
         newPromptBtn.addEventListener('click', () => {
           if (typeof DeviceMotionEvent.requestPermission === 'function') {
             DeviceMotionEvent.requestPermission()
@@ -52,18 +51,23 @@ document.addEventListener('DOMContentLoaded', () => {
               .catch(console.error);
           }
         }, { once: true }); // Only try to get permission once.
+        
+        // Listen for shakes if permission is not required (e.g., on Android)
+        if (typeof DeviceMotionEvent.requestPermission !== 'function') {
+            window.addEventListener('devicemotion', handleShake);
+        }
 
-        window.addEventListener('devicemotion', handleShake);
-
-        const shakeThreshold = 15; // How sensitive the shake detection is
+        const shakeThreshold = 30; // UPDATED: Increased from 15 to make it less sensitive
         let lastX, lastY, lastZ;
         let lastUpdate = 0;
+        let isShaking = false; // NEW: Cooldown flag to prevent multiple triggers
 
         function handleShake(event) {
+            if (isShaking) return; // If in cooldown, do nothing
+
             const acceleration = event.accelerationIncludingGravity;
             const currentTime = new Date().getTime();
 
-            // Only check for a shake every 100ms
             if ((currentTime - lastUpdate) > 100) {
                 const diffTime = currentTime - lastUpdate;
                 lastUpdate = currentTime;
@@ -72,10 +76,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (speed > shakeThreshold) {
                     getNewPrompt();
-                    // Provide haptic feedback if the browser supports it
+                    
                     if (navigator.vibrate) {
-                        navigator.vibrate(100); // Vibrate for 100ms
+                        navigator.vibrate(100); 
                     }
+
+                    // NEW: Start the cooldown period
+                    isShaking = true;
+                    setTimeout(() => {
+                        isShaking = false;
+                    }, 1500); // Cooldown for 1.5 seconds
                 }
 
                 lastX = acceleration.x;
